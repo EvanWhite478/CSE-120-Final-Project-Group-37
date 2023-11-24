@@ -19,7 +19,7 @@ def specialFunctionsMenu():
     print('2 - derivatives')
     print('3 - factorization')
     print('4 - quadratic formula')
-    print('5 - ')
+    print('5 - GCD')
 # Function to perform addition
 def add(x, y):
     return x + y
