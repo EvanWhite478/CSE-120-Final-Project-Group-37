@@ -70,3 +70,8 @@ def quadratic_formula():
         print("x is only equal to", x1)
     else:
         print("there is no real root")
+
+def gcd():
+    num1 = int(input("Enter the first number: "))
+    num2 = int(input("Enter the second number: "))
+    return math.gcd(num1, num2)
