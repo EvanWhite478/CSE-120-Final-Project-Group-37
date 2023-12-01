@@ -41,5 +41,7 @@ while True:
             print(quadratic_formula())
         elif special_user_input == "5":
             print(gcd())
+        elif special_user_input == "6":
+            print(geometric_menu())
         else:
-            print("Invalid input. Please try again.")
+                print("the value is not included, please try again")
