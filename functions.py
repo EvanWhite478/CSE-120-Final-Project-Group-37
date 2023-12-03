@@ -137,7 +137,7 @@ def gcd():
 # Function to calculate basic derivatives
 def bsc_derivatives():  
     # Asks for function
-    function = input('Enter a function in terms of x: ')
+    function = input('Enter a function in terms of x (use the format c*x**n + c*x + c: ')
     # Defines variable symbolically via the use of sympy
     x = sp.symbols('x')
     # Converts the function of an user into a sympy expression 
