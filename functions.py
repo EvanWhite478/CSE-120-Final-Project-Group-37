@@ -28,12 +28,14 @@ def specialFunctionsMenu():
     print('5 - Geometric functions')
 
 def geometric_menu():
+    # Asks for the action the user wants to perform
     user_input = input('0 - Area, Perimeter, Volume, Surface Area\n'
                         '1 - Advance Triangle\n'
                         '2 - Unit Circle\n'
                         '3 - Plot 2D Shape\n'
                         '4 - Pythagorean theorem\n'
                         ': ')
+    # Calls on different functions with an if statement
     if user_input == "0":
         print(Ask_Area_Per())
     elif user_input == '1':
@@ -45,99 +47,137 @@ def geometric_menu():
     elif user_input == '4':
         print(pythagorean_theorem())
         
-# Function to perform addition
+# Function to perform and return addition
 def add(x, y):
     return x + y
 
-# Function to perform subtraction
+# Function to perform and return subtraction
 def subtract(x, y):
     return x - y
 
-# Function to perform multiplication
+# Function to perform and return multiplication
 def multiply(x, y):
     return x * y
 
-# Function to perform division
+# Function to perform and return division
 def divide(x, y):
     if y == 0:
         return "Cannot divide by zero"
     else:
         return x / y
 
+# Function to return square root via the use of the math library
 def sqrt_root():
     num = float(input("Enter number: "))
     return math.sqrt(num)
 
+# Function to return log via the use of the math library
 def logarithmic():
     num = float(input("Enter a number: "))
-    print(math.log(num))
+    return math.log(num)
     
+# Function to return log base 2 via the use of the math library
 def log2():
     num = float(input("Enter a number: "))
-    print(math.log2(num))
-
+    return math.log2(num)
+    
+# Function to return an exponent at a specified number
 def exp():
     x = float(input("Enter a number: "))
     n = float(input("Enter the exponent number: "))
     return x**n
-    
+
+# Function to print the factors of a specified number
 def fact():
     n = int(input("Enter a number: "))
     for x in range(1,n+1):
         if (n%x == 0):
             print(x, ' ')
 
+# Function to calculate the pythagorean Theorem
 def pythagorean_theorem():
+    # Asks for action
     print("What side are you missing? (1 - Hypotenuse, 2 - Leg)")
     action = input(": ")
     if action == "1":
         adjacent = float(input("Enter the Adjacent side: "))
         opposite = float(input("Enter the Opposite side: "))
+        # Returns the square root of adj side plus the square root of opp side via the use of the math library
         return math.sqrt((adjacent * adjacent) + (opposite * opposite))
     elif action == "2":
         hypotenuse = float(input("Enter the Hypotenuse: "))
         leg = float(input("Enter the Leg: "))
+        # Returns the square root of hyp side minus the square root of leg side via the use of the math library
         return math.sqrt((hypotenuse*hypotenuse) - (leg*leg)) 
     else:
+        # Any other number will bring you back to the beginning of the file
         print("Invalid input. Please try again.")
-
+        
+# Function to calculate the x values of a quadratic formula
 def quadratic_formula():
+    # Asks for the values of a*x**2 + b*x + c
     a = float(input("Enter the first value: "))
     b = float(input("Enter the second value: "))
     c = float(input("Enter the third value: "))
+    # Takes the square root of the discriminant via the use of cmath to handle complex numbers in case it is negative
     discriminant = cmath.sqrt(b * b -4 * a * c)
+    # Overall quadratic formula using + and -
     x1 = (-b + discriminant) / (2 * a)
     x2 = (-b - discriminant) / (2 * a)
+    # Prints the result
     print("x is equal to", x1, "and", x2)
 
+# Function to calculate the greatest common denominator
 def gcd():
     num1 = int(input("Enter the first number: "))
     num2 = int(input("Enter the second number: "))
+    # Calculates the gcd of two numbers via the use of the math library
     return math.gcd(num1, num2)
 
+# Function to calculate basic derivatives
 def bsc_derivatives():  
+    # Asks for function
     function = input('Enter a function in terms of x: ')
+    # Defines variable symbolically via the use of sympy
     x = sp.symbols('x')
+    # Converts the function of an user into a sympy expression 
     expression = sp.sympify(function)
+    # Prompts the user for how many times they would like to take the derivative
     der = int(input('How many times would you like to take the derivative? '))
+    # Takes the derivative of the expression, in terms of x, 'der' amount of times based on what the user put, using the diff method
     derivative = sp.diff(expression, x, der)
+    # Returns derivative
     return derivative
-
+    
+# Function to plot equations
 def plot_equation():
+    # Asks for equation
     equation = input('Enter an equation (terms of x only): ')
+    # Defines variable symbolically via the use of sympy
     x = sp.symbols('x')
+    # Converts the function of an user into a sympy expression 
     result = sp.sympify(equation)
+    # Result is converted into a numerical function (equation_func) using lambdify from sympy. The 'numpy' states that the function should be compatible with numpy for evaluation.
     equation_func = sp.lambdify(x, result, 'numpy')
 
+    # Provides a grid based on x values
     x_values = np.linspace(-10, 10, 10)
+    # Plots the y values into the x values grid, creating a line
     y_values = equation_func(x_values)
 
+    # Plots the x values and y values, assigns a label of equation, and converts the user's equation into a string for display
     plt.plot(x_values, y_values, label='Equation: ' + str(equation))
+    # Titles the plot
     plt.title('Equation')
+    # Labels x axis
     plt.xlabel('x')
+    # Labels y axis
     plt.ylabel('y')
+    # Displays the legend of the plot
     plt.legend()
+    # Adds grid for readibility
     plt.grid(True)
+    # Shows the graph to the user
     plt.show()
 
 def Ask_Area_Per():
