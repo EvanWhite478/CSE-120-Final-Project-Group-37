@@ -3,7 +3,7 @@ from functions import *
 while True:
     menu()
     user_input = input(": ")
-    if user_input == "7":
+    if user_input == "11":
         break
     elif user_input in ["1", "2", "3", "4"]:
         num1 = float(input("Enter first number: "))
@@ -23,25 +23,37 @@ while True:
     elif user_input == "5":
         print(sqrt_root())
         print()
-    else:
-        pass
+    elif user_input == "6":
+        print(logarithmic())
+        print()
+    elif user_input == "7":
+        print(log2())
+        print()
+    elif user_input == "8":
+        print(exp())
+        print()
+    elif user_input == "9":
+        print(fact())
+        print()
     
-    if user_input == "6" :
+    if user_input == "10" :
+        print()
         specialFunctionsMenu()
         special_user_input = input(": ")
         if special_user_input == "1":
-            print(pythagorean_theorem())
+            print(bsc_derivatives())
+            print()
         elif special_user_input == "2":
-            # print(derivatives())
-            pass
-        elif special_user_input == "3":
-            # print(factorization())
-            pass
-        elif special_user_input == "4":
             print(quadratic_formula())
-        elif special_user_input == "5":
+            print()
+        elif special_user_input == "3":
             print(gcd())
-        elif special_user_input == "6":
-            print(geometric_menu())
+            print()
+        elif special_user_input == "4":
+            print(plot_equation())
+            print()
+        elif special_user_input == "5":
+            geometric_menu()
+            print()
         else:
-                print("the value is not included, please try again")
+            print("the value is not included, please try again")
