@@ -1,32 +1,39 @@
 import math 
+import cmath
 import numpy as np
 import matplotlib.pyplot as plt
+import sympy as sp
 
 # Function for the menu
 def menu():
     print("Options:")
-    print('1 - add')
-    print('2 - subtract')
-    print('3 - multiply')
-    print('4 - divide')
-    print('5 - square root')
-    print('6 - special functions')
-    print('7 - quit')
+    print('1 - Add')
+    print('2 - Subtract')
+    print('3 - Multiply')
+    print('4 - Divide')
+    print('5 - Square root')
+    print('6 - Logarithm')
+    print('7 - Logarithm base 2')
+    print('8 - Exponent')
+    print('9 - Prime factors')
+    print('10 - Special functions')
+    print('11 - Quit')
 
 def specialFunctionsMenu():
     print("Options:")
-    print('1 - pythagorean theorem')
-    print('2 - derivatives')
-    print('3 - factorization')
-    print('4 - quadratic formula')
-    print('5 - GCD')
-    print('6 - Geometric functions')
+    print('1 - Basic derivatives')
+    print('2 - Quadratic formula')
+    print('3 - GCD')
+    print('4 - Plot equations')
+    print('5 - Geometric functions')
 
 def geometric_menu():
-    user_input = input('0 - Area, Perimeter, Volume, Surface Area',
-                        '1 - Advance Triangle',
-                        '2 - Unit Circle',
-                        '3 - Plot 2D Shape')
+    user_input = input('0 - Area, Perimeter, Volume, Surface Area\n'
+                        '1 - Advance Triangle\n'
+                        '2 - Unit Circle\n'
+                        '3 - Plot 2D Shape\n'
+                        '4 - Pythagorean theorem\n'
+                        ': ')
     if user_input == "0":
         print(Ask_Area_Per())
     elif user_input == '1':
@@ -35,6 +42,8 @@ def geometric_menu():
         print(Ask_Unit_Circle())
     elif user_input == '3':
         print(Plot_2DShape())
+    elif user_input == '4':
+        print(pythagorean_theorem())
         
 # Function to perform addition
 def add(x, y):
@@ -52,11 +61,31 @@ def multiply(x, y):
 def divide(x, y):
     if y == 0:
         return "Cannot divide by zero"
-    return x / y
+    else:
+        return x / y
 
 def sqrt_root():
     num = float(input("Enter number: "))
     return math.sqrt(num)
+
+def logarithmic():
+    num = float(input("Enter a number: "))
+    print(math.log(num))
+    
+def log2():
+    num = float(input("Enter a number: "))
+    print(math.log2(num))
+
+def exp():
+    x = float(input("Enter a number: "))
+    n = float(input("Enter the exponent number: "))
+    return x**n
+    
+def fact():
+    n = int(input("Enter a number: "))
+    for x in range(1,n+1):
+        if (n%x == 0):
+            print(x, ' ')
 
 def pythagorean_theorem():
     print("What side are you missing? (1 - Hypotenuse, 2 - Leg)")
@@ -76,24 +105,43 @@ def quadratic_formula():
     a = float(input("Enter the first value: "))
     b = float(input("Enter the second value: "))
     c = float(input("Enter the third value: "))
-    discriminant = b * b -4 * a * c
-    if discriminant > 0:
-        x1 = (-b + math.sqrt(discriminant)) / (2 * a)
-        x2 = (-b - math.sqrt(discriminant)) / (2 * a)
-        print("x is equal to", x1, "and", x2)
-    elif discriminant == 0:
-        x1 = -b / (2 * a)
-        print("x is only equal to", x1)
-    else:
-        print("there is no real root")
+    discriminant = cmath.sqrt(b * b -4 * a * c)
+    x1 = (-b + discriminant) / (2 * a)
+    x2 = (-b - discriminant) / (2 * a)
+    print("x is equal to", x1, "and", x2)
 
 def gcd():
     num1 = int(input("Enter the first number: "))
     num2 = int(input("Enter the second number: "))
     return math.gcd(num1, num2)
 
+def bsc_derivatives():  
+    function = input('Enter a function: ')
+    x, a, b, c = sp.symbols('x a b c')
+    expression = sp.sympify(function)
+    der = int(input('How many times would you like to take the derivative? '))
+    derivative = sp.diff(expression, x, der)
+    return derivative
+
+def plot_equation():
+    equation = input('Enter an equation (terms of x only): ')
+    x = sp.symbols('x')
+    result = sp.sympify(equation)
+    equation_func = sp.lambdify(x, result, 'numpy')
+
+    x_values = np.linspace(-10, 10, 10)
+    y_values = equation_func(x_values)
+
+    plt.plot(x_values, y_values, label='Equation: ' + str(equation))
+    plt.title('Equation')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
 def Ask_Area_Per():
-    user_input = input('What is the shape? \nOr enter "0" for a list of aviable shapes: ')
+    user_input = input('What is the shape? \nOr enter "0" for a list of available shapes: ')
     user_input = user_input.lower()
     if user_input == '0':
         print('Rectangle',
@@ -265,7 +313,7 @@ def Ask_Triangle():
     print('Write NA to all that apply: ')
     leg1 = input('What is the length of the first leg: ')
     leg2 = input('what is the length of the second leg: ')
-    hypotenuse = input('Waht is the length of your hpotenuse: ')
+    hypotenuse = input('what is the length of your hypotenuse: ')
     theta = input('Where is your theta: (1 - leg 1 and hypotenuse side)(2 - leg 2 and hypthenuse side)').lower()
     if theta == 'na':
         print(Pyagrum(leg1,leg2,hypotenuse))
