@@ -116,8 +116,8 @@ def gcd():
     return math.gcd(num1, num2)
 
 def bsc_derivatives():  
-    function = input('Enter a function: ')
-    x, a, b, c = sp.symbols('x a b c')
+    function = input('Enter a function in terms of x: ')
+    x = sp.symbols('x')
     expression = sp.sympify(function)
     der = int(input('How many times would you like to take the derivative? '))
     derivative = sp.diff(expression, x, der)
